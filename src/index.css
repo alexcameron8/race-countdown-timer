@@ -1,0 +1,38 @@
+/* Font Family - F1 */
+@font-face {
+  font-family: "Formula1-Regular";
+  src: url("/public/fonts/Formula1-Regular-1.ttf") format("truetype");
+}
+
+body {
+  font-family: "Formula1-Regular";
+  background-color: white;
+  margin: 0px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  font-size: 0.5em;
+}
+
+#root {
+  padding: 0;
+  margin: 0;
+}
+
+.app {
+  background-color: black;
+}
+.header {
+  background-color: #ef233c;
+}
+
+.timer {
+  display: flex;
+  flex-direction: row;
+}
+
+.circle {
+  flex: 1;
+}
