@@ -1,11 +1,28 @@
 /* Font Family - F1 */
 @font-face {
   font-family: "Formula1-Regular";
-  src: url("/public/fonts/Formula1-Regular-1.ttf") format("truetype");
+  src: url("/fonts/Formula1-Regular-1.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Formula1-Black";
+  src: url("/fonts/Formula1-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Formula1-Bold";
+  src: url("/fonts/Formula1-Bold-4.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Formula1-Italic";
+  src: url("/fonts/Formula1-Italic.ttf") format("truetype");
+}
+@font-face {
+  font-family: NotoColorEmojiLimited;
+  unicode-range: U+1F1E6-1F1FF;
+  src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+}
 body {
-  font-family: "Formula1-Regular";
+  font-family: "Formula1-Regular", "Formula1-Black", "Formula1-Bold",
+    "Formula1-Italic";
   background-color: white;
   margin: 0px;
 }
@@ -22,6 +39,12 @@ li {
   gap: 1px;
 }
 
+button {
+  border-radius: 1rem;
+  border: black;
+  border-width: 1rem;
+}
+
 #root {
   padding: 0;
   margin: 0;
@@ -31,19 +54,41 @@ li {
 .app {
   background-color: black;
 }
+
 .header {
   background-color: #ef233c;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
 }
 
 .timer {
   display: flex;
   flex-direction: row;
-  margin-bottom: 1em;
+  margin-left: 12%;
+  margin-right: 12%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 2rem;
+  overflow: hidden;
 }
 
 .circle {
   flex: 1;
+  font-family: "Formula1-Bold";
+  font-size: 2.5rem;
 }
+.blue {
+  background-color: blue;
+}
+.yellow {
+  background-color: yellow;
+}
+.red {
+  background-color: red;
+}
+.white {
+  background-color: white;
+}
+
 .driver-container {
   background-color: black;
 }
@@ -58,9 +103,7 @@ li {
 
 .driver-profile {
   background-color: white;
-  width: 40%;
   border-radius: 1rem;
-  border-top-left-radius: 1rem;
   flex: 1;
   margin-left: 1%;
   margin-right: 1%;
@@ -100,6 +143,7 @@ li {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .avatar {
@@ -107,4 +151,109 @@ li {
   justify-content: center;
   align-items: center;
   border-radius: 10rem;
+}
+
+.race-select {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+  border-color: black;
+  border-width: 0.2rem;
+  font-family: "Formula1-Regular";
+  text-align: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.race-loading {
+  display: flex;
+  background-color: #ef233c;
+}
+
+.race-option {
+  border: none;
+  /* border-radius: 1rem;
+  border-color: black;
+  border-width: 0.2rem; */
+}
+
+#countdown {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.timer-wheel {
+  flex: 1;
+}
+
+.time {
+  font-family: "Formula1-Bold";
+  font-size: 2.75rem;
+  color: white;
+}
+
+.units {
+  font-family: "Formula1-Bold";
+  font-size: 1.25rem;
+  color: white;
+}
+
+.country-icon {
+  font-family: "NotoColorEmojiLimited", -apple-system;
+  font-size: 2.5rem;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.race-info-container {
+  overflow: hidden;
+  /* display: flex; */
+  /* flex-direction: row; */
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-bottom: 3%;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  border-radius: 2rem;
+  color: white;
+}
+
+.race-line-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.race-line-container p {
+  font-family: "Formula1-Italic";
+  font-size: 0.9em;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+.text-race-info {
+  margin-top: 1%;
+  font-family: "Formula1-Italic";
+  font-size: 0.75em;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.img-btn-sort {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn-sort {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  border-width: 0.125rem;
 }
