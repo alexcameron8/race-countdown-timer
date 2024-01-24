@@ -15,6 +15,11 @@
   font-family: "Formula1-Italic";
   src: url("/fonts/Formula1-Italic.ttf") format("truetype");
 }
+@font-face {
+  font-family: NotoColorEmojiLimited;
+  unicode-range: U+1F1E6-1F1FF;
+  src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+}
 body {
   font-family: "Formula1-Regular", "Formula1-Black", "Formula1-Bold",
     "Formula1-Italic";
@@ -34,6 +39,12 @@ li {
   gap: 1px;
 }
 
+button {
+  border-radius: 1rem;
+  border: black;
+  border-width: 1rem;
+}
+
 #root {
   padding: 0;
   margin: 0;
@@ -43,16 +54,21 @@ li {
 .app {
   background-color: black;
 }
+
 .header {
   background-color: #ef233c;
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
 }
 
 .timer {
   display: flex;
   flex-direction: row;
-  margin-bottom: 1em;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 12%;
+  margin-right: 12%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 2rem;
+  overflow: hidden;
 }
 
 .circle {
@@ -138,11 +154,14 @@ li {
 }
 
 .race-select {
-  background-color: #ef233c;
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 1rem;
-  border-color: #ef233c;
+  border-color: black;
+  border-width: 0.2rem;
   font-family: "Formula1-Regular";
   text-align: center;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
 .race-loading {
@@ -151,18 +170,90 @@ li {
 }
 
 .race-option {
-  border-radius: 1rem;
+  border: none;
+  /* border-radius: 1rem;
+  border-color: black;
+  border-width: 0.2rem; */
 }
 
 #countdown {
   display: flex;
   flex: 1;
-  font-family: "Formula1-Bold";
-  font-size: 2.5rem;
   justify-content: center;
   text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .timer-wheel {
   flex: 1;
+}
+
+.time {
+  font-family: "Formula1-Bold";
+  font-size: 2.75rem;
+  color: white;
+}
+
+.units {
+  font-family: "Formula1-Bold";
+  font-size: 1.25rem;
+  color: white;
+}
+
+.country-icon {
+  font-family: "NotoColorEmojiLimited", -apple-system;
+  font-size: 2.5rem;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.race-info-container {
+  overflow: hidden;
+  /* display: flex; */
+  /* flex-direction: row; */
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-bottom: 3%;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  border-radius: 2rem;
+  color: white;
+}
+
+.race-line-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.race-line-container p {
+  font-family: "Formula1-Italic";
+  font-size: 0.9em;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+.text-race-info {
+  margin-top: 1%;
+  font-family: "Formula1-Italic";
+  font-size: 0.75em;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.img-btn-sort {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn-sort {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  margin-left: 2px;
+  margin-right: 2px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  border-width: 0.125rem;
 }
