@@ -51,6 +51,8 @@ li {
   display: flex;
   flex-direction: row;
   margin-bottom: 1em;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .circle {
@@ -153,59 +155,14 @@ li {
 }
 
 #countdown {
+  display: flex;
   flex: 1;
   font-family: "Formula1-Bold";
   font-size: 2.5rem;
-}
-circle {
-  /* animation: none; */
-}
-.circle-current {
-  fill: lime;
-  /* animation: rotate 30s linear infinite forwards; */
-  animation: rotate;
+  justify-content: center;
+  text-align: center;
 }
 
-.empty-circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke: #198051;
-  /* animation: countdown 30s linear infinite forwards; */
-  animation: rotate;
-}
-
-.remaining-circle {
-  stroke: #198051;
-  opacity: 0.3;
-  animation: rotate;
-}
-
-svg {
-  animation: none;
-}
-svg text {
-  font-family: sans-serif;
-  fill: white;
-  font-weight: bold;
-  dominant-baseline: middle;
-  text-anchor: middle;
-  font-size: 0.75rem;
-}
-
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 0px;
-  }
-  to {
-    stroke-dashoffset: 113px;
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
+.timer-wheel {
+  flex: 1;
 }

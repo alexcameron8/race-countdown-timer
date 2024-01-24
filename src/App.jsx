@@ -2,6 +2,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 export default App;
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const raw_teams_data = [
   {
@@ -108,7 +109,7 @@ function Header() {
           <SelectDropdown raceData={raceData} onSelect={handleSelectRaceId} />
           <RaceInformation selectedRace={raceData[selectedRaceId]} />
           <RaceTimer selectedRace={raceData[selectedRaceId]} />
-          {/* <DriverProfiles /> */}
+          <DriverProfiles />
         </div>
       )}
     </div>
@@ -154,7 +155,6 @@ function RaceTimer({ selectedRace }) {
 
     const countdownInterval = setInterval(function () {
       const currentDate = new Date();
-
       const timeDifference = raceStartDate - currentDate;
 
       // Check if the race date has passed
@@ -172,21 +172,6 @@ function RaceTimer({ selectedRace }) {
       );
       const newSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-      if (newDays !== days && newDays === 0) {
-        console.log("Days condition.");
-      }
-      if (newHours !== hours && newHours === 0) {
-        console.log("Hours condition.");
-      }
-      if (newMinutes !== minutes && newMinutes === 0) {
-        console.log("Minutes condition.");
-      }
-      if (newSeconds !== seconds && newSeconds === 0) {
-        console.log("Seconds condition:");
-        // console.log(`(var) secondsAnimation (True???):" + ${secondsAnimation}`);
-      }
-      // Logic for calcualting initial rotation
-
       setDays(newDays);
       setHours(newHours);
       setMinutes(newMinutes);
@@ -196,149 +181,78 @@ function RaceTimer({ selectedRace }) {
     return () => clearInterval(countdownInterval);
   }, [days, hours, minutes, seconds, selectedRace]);
 
-  const timeRemaining = [{ days, hours, minutes, seconds }];
-
   return (
     <div className="timer">
-      <TimerCircle type={"Days"} color={"blue"} timeRemaining={timeRemaining}>
-        {days}
-      </TimerCircle>
-      <TimerCircle type={"Hours"} color={"white"} timeRemaining={timeRemaining}>
-        {hours}
-      </TimerCircle>
-      <TimerCircle
-        type={"Minutes"}
-        color={"yellow"}
-        timeRemaining={timeRemaining}
-      >
-        {minutes}
-      </TimerCircle>
-      <TimerCircle type={"Seconds"} color={"red"} timeRemaining={timeRemaining}>
-        {seconds}
-      </TimerCircle>
+      <TimerCircle type="days" time={days} color={"blue"} />
+      <TimerCircle type="hours" time={hours} color={"white"} />
+      <TimerCircle type="minutes" time={minutes} color={"yellow"} />
+      <TimerCircle type="seconds" time={seconds} color={"red"} />
     </div>
   );
 }
 
-function TimerCircle({ type, children, color, timeRemaining }) {
-  // console.log(timeRemaining[0]);
-  const [rotationSeconds, setRotationSeconds] = useState(
-    timeRemaining[0].seconds * 6 - 360
-  ); //multiply current time by 6 degrees, subtracted by 360 for start location
-  // console.log("Init rotation seconds:" + rotationSeconds);
-  const [rotationMinutes, setRotationMinutes] = useState(
-    timeRemaining[0].minutes * 6 - 360
-  ); //multiply current time by 6 degrees, subtracted by 360 for start location
-  const [rotationHours, setRotationHours] = useState(
-    timeRemaining[0].hours * 15 - 360
-  );
-  const calculated_degree_seconds = timeRemaining[0].seconds * 6 - 360;
-  const calculated_degree_minutes = timeRemaining[0].minutes * 6 - 360;
-  const calculated_degree_hours = timeRemaining[0].hours * 15 - 360;
-  let empty_dash_offset_num = timeRemaining[0].seconds * 1.66;
-  console.log(
-    `empty_dash_offset_num: ${type}:` +
-      empty_dash_offset_num +
-      `rotationSeconds: ${rotationSeconds}`
-  );
+function TimerCircle({ type, time, color }) {
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (rotationSeconds === 0) {
-    empty_dash_offset_num = 0;
-  }
-  const empty_dash_offset_fill = `-${empty_dash_offset_num}px`;
-  console.log("Dash offset: " + empty_dash_offset_fill);
-
-  if (rotationSeconds !== calculated_degree_seconds && rotationSeconds !== 0) {
-    setRotationSeconds(timeRemaining[0].seconds * 6 - 360);
-  }
-
-  // console.log(
-  //   "Hours:" +
-  //     timeRemaining[0].hours +
-  //     " Rotation Degree:" +
-  //     rotationHours +
-  //     " Should be:" +
-  //     temp
-  // );
-  if (rotationSeconds === -360) {
-    setRotationSeconds((prevRotation) => prevRotation - prevRotation);
-  }
-  if (rotationMinutes === -360) {
-    setRotationMinutes((prevRotation) => prevRotation - prevRotation);
-  }
-  if (rotationHours === -360) {
-    setRotationHours((prevRotation) => prevRotation - prevRotation);
-  }
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Update rotation for seconds
-      setRotationSeconds((prevRotation) => prevRotation - 6); // Rotate by 6 degrees every second (360 / 60)
-      // Check if a minute has passed
-      if (rotationSeconds % 360 === 0) {
-        // Update rotation for minutes
-        setRotationMinutes((prevRotation) => prevRotation - 6); // Rotate by 6 degrees every minute (360 / 60)
+    // Use useEffect to update isLoading when time changes
+    if (time !== 0) {
+      setIsLoading(true);
+    }
+  }, [time]);
+  const total_seconds = 60;
+  const total_minutes = 60 * 60;
+  const total_hours = 60 * 60 * 24;
 
-        // Check if an hour has passed
-        if (rotationMinutes % 360 === 0) {
-          // Update rotation for hours
-          setRotationHours((prevRotation) => prevRotation - 15); // Rotate by 15 degrees every hour (360 / 24)
-        }
-      }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  let rotation;
-  if (type === "Seconds") {
-    rotation = rotationSeconds;
-  } else if (type === "Minutes") {
-    rotation = rotationMinutes;
-  } else if (type === "Hours") {
-    rotation = rotationHours;
+  let interval_time = time;
+  let total_duration = total_seconds;
+  if (type === "minutes") {
+    interval_time = time * 60;
+    total_duration = total_minutes;
   }
-  // console.log("Type: " + type + ", Rotation:" + rotation);
-  // transform: `rotate(${
-  //   type === "Seconds"
-  //     ? rotationSeconds
-  //     : type === "Minutes"
-  //     ? rotationMinutes
-  //     : type === "Hours"
-  //     ? rotationHours
-  //     : 0
+  if (type === "hours") {
+    interval_time = time * 60 * 60;
+    total_duration = total_hours;
+  }
+  if (type === "days") {
+    interval_time = time * 60 * 60 * 24;
+    total_duration = total_hours;
+  }
+  const timerProps = {
+    isPlaying: true,
+    size: 225,
+    strokeWidth: 16,
+    trailStrokeWidth: 14,
+    trailColor: "grey",
+  };
+
+  const renderTime = (dimension, time) => {
+    return (
+      <div className="time-wrapper">
+        <div className="time">{time}</div>
+        <div>{dimension}</div>
+      </div>
+    );
+  };
+
+  console.log(type);
+  console.log(isLoading);
 
   return (
     <div id="countdown">
-      <p className={"circle"}>{type}</p>
-      <svg viewBox="0 0 40 40">
-        <g
-          transform="translate(20 20) rotate(-90)"
-          strokeWidth="3"
-          fill="none"
-          strokeLinecap="round"
+      {isLoading && (
+        <CountdownCircleTimer
+          className={`timer-wheel ${type}`}
+          {...timerProps}
+          colors={color}
+          duration={total_duration}
+          initialRemainingTime={interval_time}
+          rotation="counterclockwise"
+          onComplete={() => ({ shouldRepeat: true })}
         >
-          <circle
-            className={"empty-circle " + type.toLowerCase()}
-            r="18"
-            style={{
-              strokeDashoffset: empty_dash_offset_fill,
-            }}
-          />
-          <circle
-            className={"remaining-circle " + type.toLowerCase()}
-            r="18"
-            style={{ transform: `rotate(${rotation}deg)` }}
-          />
-          <circle
-            className="circle-current"
-            r="2"
-            cx="18"
-            style={{ transform: `rotate(${rotation}deg)` }}
-          />
-        </g>
-        <text x="20" y="20">
-          {children}
-        </text>
-      </svg>
+          {() => <span>{renderTime(type, time)}</span>}
+        </CountdownCircleTimer>
+      )}
     </div>
   );
 }
