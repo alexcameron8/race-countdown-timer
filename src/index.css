@@ -54,8 +54,10 @@ button {
 .app {
   background-color: black;
 }
-
 .header {
+  margin-bottom: 1%;
+}
+.landing {
   background-color: #ef233c;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
@@ -220,7 +222,12 @@ button {
   border-radius: 2rem;
   color: white;
 }
-
+.race-select-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 .race-line-container {
   display: flex;
   align-items: center;
@@ -256,4 +263,13 @@ button {
   justify-content: center;
   border-radius: 1rem;
   border-width: 0.125rem;
+}
+.circuit-container {
+  margin-bottom: 2%;
+}
+.circuit-image {
+  /* border: 0.1rem solid black; */
+  border-radius: 2rem;
+  width: auto;
+  height: auto;
 }
