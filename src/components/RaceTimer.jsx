@@ -6,6 +6,7 @@ export function RaceTimer({ selectedRace }) {
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [raceExpired, setRaceExpired] = useState(false);
 
   useEffect(() => {
     const raceStartDate = new Date(selectedRace["date"]);
@@ -17,8 +18,10 @@ export function RaceTimer({ selectedRace }) {
       // Check if the race date has passed
       if (timeDifference <= 0) {
         clearInterval(countdownInterval);
-        console.log("Countdown expired!");
+        setRaceExpired(true);
         return;
+      } else {
+        setRaceExpired(false);
       }
       const newDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
       const newHours = Math.floor(
@@ -37,13 +40,20 @@ export function RaceTimer({ selectedRace }) {
     }, 1000); // Update every second
     return () => clearInterval(countdownInterval);
   }, [days, hours, minutes, seconds, selectedRace]);
-
   return (
-    <div className="timer">
-      <TimerCircle type="days" time={days} color={"blue"} />
-      <TimerCircle type="hours" time={hours} color={"white"} />
-      <TimerCircle type="minutes" time={minutes} color={"yellow"} />
-      <TimerCircle type="seconds" time={seconds} color={"red"} />
+    <div>
+      {!raceExpired ? (
+        <div className="timer">
+          <TimerCircle type="days" time={days} color={"blue"} />
+          <TimerCircle type="hours" time={hours} color={"white"} />
+          <TimerCircle type="minutes" time={minutes} color={"yellow"} />
+          <TimerCircle type="seconds" time={seconds} color={"red"} />
+        </div>
+      ) : (
+        <div className="timer-error">
+          This round has already taken place! ({selectedRace["date"]})
+        </div>
+      )}
     </div>
   );
 }

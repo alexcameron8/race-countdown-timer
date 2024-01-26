@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { SelectDropdown } from "./SelectDropdown";
 import { RaceInformation } from "./RaceInformation";
 import { RaceTimer } from "./RaceTimer";
 
-export function Header() {
+export function Header({ handleSelectYear, year }) {
   const [raceData, setRaceData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [teamsData, setTeamsData] = useState(null);
   const [selectedRaceId, setSelectedRaceId] = useState(0);
+  const years_list = ["2024", "2023", "2022", "2021", "2020"]; //Temporary prev 5 years of data available
 
   function handleSelectRaceId(raceName) {
     setSelectedRaceId(raceName);
@@ -16,9 +15,9 @@ export function Header() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://ergast.com/api/f1/2024.json").then(
-          (res) => res.json()
-        );
+        const response = await fetch(
+          `http://ergast.com/api/f1/${year}.json`
+        ).then((res) => res.json());
         const races = response["MRData"]["RaceTable"]["Races"];
         setRaceData(Array.from(races));
       } catch (error) {
@@ -29,7 +28,7 @@ export function Header() {
     };
 
     fetchData();
-  }, []);
+  }, [year]);
   return (
     <div className="header-container">
       {loading ? (
@@ -37,11 +36,29 @@ export function Header() {
       ) : (
         <>
           <div className="header">
-            <SelectDropdown raceData={raceData} onSelect={handleSelectRaceId} />
+            <div className="title">{year} Formula 1 Race Countdown</div>
+            <div className="controls">
+              <select
+                className="race-select"
+                onChange={(e) => handleSelectYear(e.target.value)}
+              >
+                {years_list.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+
           <div className="landing">
             <div className="race-info-container">
-              <RaceInformation selectedRace={raceData[selectedRaceId]} />
+              <RaceInformation
+                selectedRace={raceData[selectedRaceId]}
+                handleSelectRaceId={handleSelectRaceId}
+                raceData={raceData}
+                year={year}
+              />
             </div>
             <RaceTimer selectedRace={raceData[selectedRaceId]} />
           </div>

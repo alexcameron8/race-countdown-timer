@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { SelectDropdown } from "./SelectDropdown";
+
 function getEmojiFlag(country) {
   switch (country) {
     case "Abu Dhabi Grand Prix":
@@ -107,41 +110,172 @@ function getCircuitPNG(country) {
       return "Unknown Flag";
   }
 }
-export function RaceInformation({ selectedRace }) {
-  console.log(selectedRace);
+export function RaceInformation({
+  raceData,
+  selectedRace,
+  handleSelectRaceId,
+  year,
+}) {
+  const totalRaceCount = raceData.length;
   return (
     <div className="race-information-container">
       <div className="race-information">
-        <div className="race-line-container">
-          <p> Location: </p>
+        <div className="race-title-container">
+          {/* <p> Location: </p> */}
           <h1>
+            <span className="country-icon">
+              {getEmojiFlag(selectedRace["raceName"])}
+            </span>
             {selectedRace["Circuit"]["Location"]["country"] +
               ", " +
               selectedRace["Circuit"]["Location"]["locality"]}
           </h1>
-          <div className="country-icon">
-            {getEmojiFlag(selectedRace["raceName"])}
-          </div>
         </div>
         <div className="race-line-container">
-          <p> Circuit: </p>
-          <h3>{selectedRace["Circuit"]["circuitName"]}</h3>
+          <h4>Date: {selectedRace["date"]}</h4>
         </div>
+        <RaceEvents selectedRace={selectedRace} />
         <div className="race-line-container">
-          <p> Date: </p>
-          <h4>{selectedRace["date"]}</h4>
+          <h4>
+            Race: #{selectedRace["round"]}/{totalRaceCount}
+          </h4>
         </div>
-        <div className="race-line-container">
-          <p> Race: #{selectedRace["round"]}/24</p>
-        </div>
+        <SelectDropdown raceData={raceData} onSelect={handleSelectRaceId} />
       </div>
       <div className="circuit-container">
-        <img
-          className="circuit-image"
-          src={getCircuitPNG(selectedRace["raceName"])}
-          alt={selectedRace["round"]}
-        />
+        <div className="race-line-container">
+          {/* <p> Circuit: </p> */}
+          <h3>{selectedRace["Circuit"]["circuitName"]}</h3>
+        </div>
+        <div className="image-container">
+          <img
+            className="circuit-image"
+            src={getCircuitPNG(selectedRace["raceName"])}
+            alt={selectedRace["round"]}
+          />
+        </div>
       </div>
+    </div>
+  );
+}
+
+export function RaceEvents({ selectedRace }) {
+  const [session, setSession] = useState("Race");
+
+  function handleSetSession(type) {
+    setSession(() => type);
+    console.log("To-Do: Update Timer!!!");
+  }
+
+  return (
+    <div className="button-sessions-container">
+      {/* Check if FirstPractice exists */}
+      {selectedRace.FirstPractice && (
+        // <div>
+        //   <h3>First Practice</h3>
+        //   <p>Date: {selectedRace.FirstPractice.date}</p>
+        //   <p>Time: {selectedRace.FirstPractice.time}</p>
+        // </div>
+        <button
+          className="button-session"
+          onClick={() => handleSetSession("FP1")}
+          style={{
+            backgroundColor:
+              session === "FP1" ? "rgba(255, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          FP1
+        </button>
+      )}
+
+      {/* Check if SecondPractice exists */}
+      {selectedRace.SecondPractice && (
+        // <div>
+        //   <h3>Second Practice</h3>
+        //   <p>Date: {selectedRace.SecondPractice.date}</p>
+        //   <p>Time: {selectedRace.SecondPractice.time}</p>
+        // </div>
+        <button
+          className="button-session"
+          onClick={() => handleSetSession("FP2")}
+          style={{
+            backgroundColor:
+              session === "FP2" ? "rgba(255, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          FP2
+        </button>
+      )}
+
+      {/* Check if ThirdPractice exists */}
+      {selectedRace.ThirdPractice && (
+        // <div>
+        //   <h3>Third Practice</h3>
+        //   <p>Date: {selectedRace.ThirdPractice.date}</p>
+        //   <p>Time: {selectedRace.ThirdPractice.time}</p>
+        // </div>
+        <button
+          className="button-session"
+          onClick={() => handleSetSession("FP3")}
+          style={{
+            backgroundColor:
+              session === "FP3" ? "rgba(255, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          FP3
+        </button>
+      )}
+
+      {/* Check if Qualifying exists */}
+      {selectedRace.Qualifying && (
+        // <div>
+        //   <h3>Qualifying</h3>
+        //   <p>Date: {selectedRace.Qualifying.date}</p>
+        //   <p>Time: {selectedRace.Qualifying.time}</p>
+        // </div>
+        <button
+          className="button-session"
+          onClick={() => handleSetSession("Qualifying")}
+          style={{
+            backgroundColor:
+              session === "Qualifying"
+                ? "rgba(255, 0, 0, 0.3)"
+                : "rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          Qualifying
+        </button>
+      )}
+      {/* Check if Sprint exists */}
+      {selectedRace.Sprint && (
+        // <div>
+        //   <h3>Sprint</h3>
+        //   <p>Date: {selectedRace.Sprint.date}</p>
+        //   <p>Time: {selectedRace.Sprint.time}</p>
+        // </div>
+        <button
+          className="button-session"
+          onClick={() => handleSetSession("Sprint")}
+          style={{
+            backgroundColor:
+              session === "Sprint"
+                ? "rgba(255, 0, 0, 0.3)"
+                : "rgba(0, 0, 0, 0.3)",
+          }}
+        >
+          Sprint
+        </button>
+      )}
+      <button
+        className="button-session"
+        onClick={() => handleSetSession("Race")}
+        style={{
+          backgroundColor:
+            session === "Race" ? "rgba(255, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.3)",
+        }}
+      >
+        Race
+      </button>
     </div>
   );
 }

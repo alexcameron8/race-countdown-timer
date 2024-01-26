@@ -30,15 +30,45 @@ export function TimerCircle({ type, time, color }) {
   }
 
   // Determine if width is mobile
-  const isMobile = window.innerWidth < 768 || window.visualViewport.width < 768;
+  const isMobile = window.innerWidth < 450 || window.visualViewport.width < 450;
+  const isLargeTablet =
+    window.innerWidth < 1200 || window.visualViewport.width < 1200;
+  const isSmallTablet =
+    window.innerWidth < 800 || window.visualViewport.width < 800;
+
   // Dynamically adjust the size based on screen resolution
-  const timer_size = isMobile ? 100 : 225;
+  const timer_size = isMobile
+    ? 75
+    : isSmallTablet
+    ? 100
+    : isLargeTablet
+    ? 175
+    : 225;
+  const stroke_width = isMobile
+    ? 10
+    : isSmallTablet
+    ? 12
+    : isLargeTablet
+    ? 14
+    : 16;
+  const trailStrokeWidth = isMobile
+    ? 10
+    : isSmallTablet
+    ? 12
+    : isLargeTablet
+    ? 14
+    : 16;
+
+  // console.log("isSmallTablet:" + isSmallTablet);
+  // console.log("isLargeTablet:" + isLargeTablet);
+  // console.log("isMobile:" + isMobile);
+  // console.log(timer_size);
 
   const timerProps = {
     isPlaying: true,
     size: timer_size,
-    strokeWidth: 16,
-    trailStrokeWidth: 14,
+    strokeWidth: stroke_width,
+    trailStrokeWidth: trailStrokeWidth,
     trailColor: "grey",
   };
 
