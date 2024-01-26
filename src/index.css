@@ -184,6 +184,7 @@ body::-webkit-scrollbar-thumb {
 }
 .wrapper {
   display: flex;
+  overflow: hidden;
 }
 
 @keyframes swipe {

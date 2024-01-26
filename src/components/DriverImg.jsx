@@ -49,7 +49,7 @@ export function DriverImg({ driver }) {
     <img
       className="avatar"
       src={getDriverImg(driver["Driver"]["driverId"])}
-      alt={driver.name}
+      alt={driver["Driver"]["driverId"]}
     />
   );
 }
