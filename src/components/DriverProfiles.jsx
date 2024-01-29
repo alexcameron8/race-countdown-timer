@@ -494,7 +494,7 @@ const raceResults = {
 export function DriverProfiles({ year }) {
   const [activeTeam, setActiveTeam] = useState(null);
   const [driverStandingsData, setDriverStandingsData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [activeDrivers, setActiveDrivers] = useState([]);
 
   function handleSetActiveTeam(activeTeam) {
     setActiveTeam(activeTeam);
@@ -514,17 +514,34 @@ export function DriverProfiles({ year }) {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
   }, [year]);
-  let active_drivers = [];
-  if (driverStandingsData !== null) {
-    //Temporary logic to address 2024 driver API lack of data
-    if (activeTeam !== null) {
+  // let active_drivers = [];
+  // if (driverStandingsData !== null) {
+  //   //Temporary logic to address 2024 driver API lack of data
+  //   if (activeTeam !== null) {
+  //     let constructorId = activeTeam.constructorId;
+  //     if (activeTeam.constructorId === "stake") {
+  //       constructorId = "alfa";
+  //     }
+  //     if (activeTeam.constructorId === "vcarb") {
+  //       constructorId = "alphatauri";
+  //     }
+
+  //     active_drivers = driverStandingsData["DriverStandings"]
+  //       .slice()
+  //       .filter(
+  //         (driver) =>
+  //           driver["Constructors"][0]["constructorId"] === constructorId
+  //       );
+  //   }
+  // }
+  useEffect(() => {
+    if (activeTeam !== null && driverStandingsData !== null) {
+      // Temporary logic to address 2024 driver API lack of data
       let constructorId = activeTeam.constructorId;
       if (activeTeam.constructorId === "stake") {
         constructorId = "alfa";
@@ -533,14 +550,17 @@ export function DriverProfiles({ year }) {
         constructorId = "alphatauri";
       }
 
-      active_drivers = driverStandingsData["DriverStandings"]
+      const updatedActiveDrivers = driverStandingsData["DriverStandings"]
         .slice()
         .filter(
           (driver) =>
             driver["Constructors"][0]["constructorId"] === constructorId
         );
+
+      setActiveDrivers(updatedActiveDrivers);
     }
-  }
+  }, [activeTeam, driverStandingsData]);
+
   return (
     <div>
       <Teams year={year} setActiveTeam={handleSetActiveTeam} />
@@ -550,8 +570,11 @@ export function DriverProfiles({ year }) {
         <div className="driver-container">
           <div className="team-name">{activeTeam.name}</div>
           <div className="driver-profiles">
-            <DriverProfile driver={active_drivers[0]} />
-            <DriverProfile driver={active_drivers[1]} />
+            {/* <DriverProfile driver={active_drivers[0]} />
+            <DriverProfile driver={active_drivers[1]} /> */}
+            {activeDrivers.map((driver, index) => (
+              <DriverProfile key={index} driver={driver} />
+            ))}
           </div>
         </div>
       )}

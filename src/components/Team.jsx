@@ -23,7 +23,7 @@ function getTeamImg(team) {
     case "renault":
       return "/assets/icons/renault-7.svg";
     case "stake":
-      return "/assets/icons/stake-f1.png";
+      return "/assets/icons/stake-f1.PNG";
     case "vcarb":
       return "/assets/icons/vcarb.jpg";
     case "williams":
