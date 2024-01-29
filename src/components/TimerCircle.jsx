@@ -6,7 +6,7 @@ export function TimerCircle({ type, time, color }) {
 
   useEffect(() => {
     // Use useEffect to update isLoading when time changes
-    if (time !== 0) {
+    if (time !== null) {
       setIsLoading(true);
     }
   }, [time]);
@@ -58,11 +58,6 @@ export function TimerCircle({ type, time, color }) {
     : isLargeTablet
     ? 14
     : 16;
-
-  // console.log("isSmallTablet:" + isSmallTablet);
-  // console.log("isLargeTablet:" + isLargeTablet);
-  // console.log("isMobile:" + isMobile);
-  // console.log(timer_size);
 
   const timerProps = {
     isPlaying: true,

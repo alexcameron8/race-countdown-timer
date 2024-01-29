@@ -519,26 +519,7 @@ export function DriverProfiles({ year }) {
 
     fetchData();
   }, [year]);
-  // let active_drivers = [];
-  // if (driverStandingsData !== null) {
-  //   //Temporary logic to address 2024 driver API lack of data
-  //   if (activeTeam !== null) {
-  //     let constructorId = activeTeam.constructorId;
-  //     if (activeTeam.constructorId === "stake") {
-  //       constructorId = "alfa";
-  //     }
-  //     if (activeTeam.constructorId === "vcarb") {
-  //       constructorId = "alphatauri";
-  //     }
 
-  //     active_drivers = driverStandingsData["DriverStandings"]
-  //       .slice()
-  //       .filter(
-  //         (driver) =>
-  //           driver["Constructors"][0]["constructorId"] === constructorId
-  //       );
-  //   }
-  // }
   useEffect(() => {
     if (activeTeam !== null && driverStandingsData !== null) {
       // Temporary logic to address 2024 driver API lack of data
