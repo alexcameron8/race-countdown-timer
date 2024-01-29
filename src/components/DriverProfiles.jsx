@@ -523,24 +523,24 @@ export function DriverProfiles({ year }) {
   }, [year]);
   let active_drivers = [];
   if (driverStandingsData !== null) {
-    console.log(activeTeam);
-    console.log(driverStandingsData);
     //Temporary logic to address 2024 driver API lack of data
-    let constructorId = activeTeam.constructorId;
-    if (activeTeam.constructorId === "stake") {
-      constructorId = "alfa";
-    }
-    if (activeTeam.constructorId === "vcarb") {
-      constructorId = "alphatauri";
-    }
+    if (activeTeam !== null) {
+      let constructorId = activeTeam.constructorId;
+      if (activeTeam.constructorId === "stake") {
+        constructorId = "alfa";
+      }
+      if (activeTeam.constructorId === "vcarb") {
+        constructorId = "alphatauri";
+      }
 
-    active_drivers = driverStandingsData["DriverStandings"]
-      .slice()
-      .filter(
-        (driver) => driver["Constructors"][0]["constructorId"] === constructorId
-      );
+      active_drivers = driverStandingsData["DriverStandings"]
+        .slice()
+        .filter(
+          (driver) =>
+            driver["Constructors"][0]["constructorId"] === constructorId
+        );
+    }
   }
-  console.log(active_drivers);
   return (
     <div>
       <Teams year={year} setActiveTeam={handleSetActiveTeam} />
