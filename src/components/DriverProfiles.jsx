@@ -491,23 +491,6 @@ const raceResults = {
   ],
 };
 
-export const temp_raw_driver_data_2024 = [
-  {
-    image: "/src/assets/carlos-sainz-ferrari-1.jpg",
-    name: "Carlos Sainz",
-    team: "Ferrari",
-    race_wins: 2,
-    championships: 0,
-  },
-  {
-    image: "/src/assets/charles-leclerc.jpg",
-    name: "Charles Leclerc",
-    team: "Ferrari",
-    race_wins: 5,
-    championships: 0,
-  },
-];
-
 export function DriverProfiles({ year }) {
   const [activeTeam, setActiveTeam] = useState(null);
   const [driverStandingsData, setDriverStandingsData] = useState(null);
