@@ -59,53 +59,53 @@ function getEmojiFlag(country) {
 function getCircuitPNG(country) {
   switch (country) {
     case "Abu Dhabi Grand Prix":
-      return "/src/assets/circuits/abudhabi.avif";
+      return "/assets/circuits/abudhabi.avif";
     case "Australian Grand Prix":
-      return "/src/assets/circuits/australia.avif";
+      return "/assets/circuits/australia.avif";
     case "Austrian Grand Prix":
-      return "/src/assets/circuits/austria.avif";
+      return "/assets/circuits/austria.avif";
     case "Azerbaijan Grand Prix":
-      return "/src/assets/circuits/azerbaijan.avif";
+      return "/assets/circuits/azerbaijan.avif";
     case "Bahrain Grand Prix":
-      return "/src/assets/circuits/bahrain.avif";
+      return "/assets/circuits/bahrain.avif";
     case "Belgian Grand Prix":
-      return "/src/assets/circuits/belgium.avif";
+      return "/assets/circuits/belgium.avif";
     case "British Grand Prix":
-      return "/src/assets/circuits/great-britain.avif";
+      return "/assets/circuits/great-britain.avif";
     case "Canadian Grand Prix":
-      return "/src/assets/circuits/canada.avif";
+      return "/assets/circuits/canada.avif";
     case "Chinese Grand Prix":
-      return "/src/assets/circuits/china.avif";
+      return "/assets/circuits/china.avif";
     case "Dutch Grand Prix":
-      return "/src/assets/circuits/netherlands.png";
+      return "/assets/circuits/netherlands.png";
     case "Emilia Romagna Grand Prix":
-      return "/src/assets/circuits/italy_imola.png";
+      return "/assets/circuits/italy_imola.png";
     case "Hungarian Grand Prix":
-      return "/src/assets/circuits/hungary.avif";
+      return "/assets/circuits/hungary.avif";
     case "Italian Grand Prix":
-      return "/src/assets/circuits/monza.avif";
+      return "/assets/circuits/monza.avif";
     case "Japanese Grand Prix":
-      return "/src/assets/circuits/japan.avif";
+      return "/assets/circuits/japan.avif";
     case "Las Vegas Grand Prix":
-      return "/src/assets/circuits/las_vegas.avif";
+      return "/assets/circuits/las_vegas.avif";
     case "Mexico City Grand Prix":
-      return "/src/assets/circuits/mexico.avif";
+      return "/assets/circuits/mexico.avif";
     case "Miami Grand Prix":
-      return "/src/assets/circuits/miami.avif";
+      return "/assets/circuits/miami.avif";
     case "Monaco Grand Prix":
-      return "/src/assets/circuits/monaco.png";
+      return "/assets/circuits/monaco.png";
     case "Qatar Grand Prix":
-      return "/src/assets/circuits/qatar.avif";
+      return "/assets/circuits/qatar.avif";
     case "São Paulo Grand Prix":
-      return "/src/assets/circuits/brazil.avif";
+      return "/assets/circuits/brazil.avif";
     case "Saudi Arabian Grand Prix":
-      return "/src/assets/circuits/Saudi_Arabia.png";
+      return "/assets/circuits/Saudi_Arabia.png";
     case "Singapore Grand Prix":
-      return "/src/assets/circuits/singapore.avif";
+      return "/assets/circuits/singapore.avif";
     case "Spanish Grand Prix":
-      return "/src/assets/circuits/spain.avif";
+      return "/assets/circuits/spain.avif";
     case "United States Grand Prix":
-      return "/src/assets/circuits/austin.avif";
+      return "/assets/circuits/austin.avif";
     default:
       return "Unknown Flag";
   }

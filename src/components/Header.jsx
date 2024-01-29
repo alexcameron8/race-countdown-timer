@@ -16,7 +16,7 @@ export function Header({ handleSelectYear, year }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://ergast.com/api/f1/${year}.json`
+          `https://ergast.com/api/f1/${year}.json`
         ).then((res) => res.json());
         const races = response["MRData"]["RaceTable"]["Races"];
         setRaceData(Array.from(races));

@@ -491,27 +491,10 @@ const raceResults = {
   ],
 };
 
-export const temp_raw_driver_data_2024 = [
-  {
-    image: "/src/assets/carlos-sainz-ferrari-1.jpg",
-    name: "Carlos Sainz",
-    team: "Ferrari",
-    race_wins: 2,
-    championships: 0,
-  },
-  {
-    image: "/src/assets/charles-leclerc.jpg",
-    name: "Charles Leclerc",
-    team: "Ferrari",
-    race_wins: 5,
-    championships: 0,
-  },
-];
-
 export function DriverProfiles({ year }) {
   const [activeTeam, setActiveTeam] = useState(null);
   const [driverStandingsData, setDriverStandingsData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [activeDrivers, setActiveDrivers] = useState([]);
 
   function handleSetActiveTeam(activeTeam) {
     setActiveTeam(activeTeam);
@@ -520,7 +503,7 @@ export function DriverProfiles({ year }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://ergast.com/api/f1/${year}/driverStandings.json`
+          `https://ergast.com/api/f1/${year}/driverStandings.json`
         ).then((res) => res.json());
         const driverStandings =
           response["MRData"]["StandingsTable"]["StandingsLists"][0];
@@ -531,33 +514,53 @@ export function DriverProfiles({ year }) {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchData();
   }, [year]);
-  let active_drivers = [];
-  if (driverStandingsData !== null) {
-    console.log(activeTeam);
-    console.log(driverStandingsData);
-    //Temporary logic to address 2024 driver API lack of data
-    let constructorId = activeTeam.constructorId;
-    if (activeTeam.constructorId === "stake") {
-      constructorId = "alfa";
-    }
-    if (activeTeam.constructorId === "vcarb") {
-      constructorId = "alphatauri";
-    }
+  // let active_drivers = [];
+  // if (driverStandingsData !== null) {
+  //   //Temporary logic to address 2024 driver API lack of data
+  //   if (activeTeam !== null) {
+  //     let constructorId = activeTeam.constructorId;
+  //     if (activeTeam.constructorId === "stake") {
+  //       constructorId = "alfa";
+  //     }
+  //     if (activeTeam.constructorId === "vcarb") {
+  //       constructorId = "alphatauri";
+  //     }
 
-    active_drivers = driverStandingsData["DriverStandings"]
-      .slice()
-      .filter(
-        (driver) => driver["Constructors"][0]["constructorId"] === constructorId
-      );
-  }
-  console.log(active_drivers);
+  //     active_drivers = driverStandingsData["DriverStandings"]
+  //       .slice()
+  //       .filter(
+  //         (driver) =>
+  //           driver["Constructors"][0]["constructorId"] === constructorId
+  //       );
+  //   }
+  // }
+  useEffect(() => {
+    if (activeTeam !== null && driverStandingsData !== null) {
+      // Temporary logic to address 2024 driver API lack of data
+      let constructorId = activeTeam.constructorId;
+      if (activeTeam.constructorId === "stake") {
+        constructorId = "alfa";
+      }
+      if (activeTeam.constructorId === "vcarb") {
+        constructorId = "alphatauri";
+      }
+
+      const updatedActiveDrivers = driverStandingsData["DriverStandings"]
+        .slice()
+        .filter(
+          (driver) =>
+            driver["Constructors"][0]["constructorId"] === constructorId
+        );
+
+      setActiveDrivers(updatedActiveDrivers);
+    }
+  }, [activeTeam, driverStandingsData]);
+
   return (
     <div>
       <Teams year={year} setActiveTeam={handleSetActiveTeam} />
@@ -567,8 +570,11 @@ export function DriverProfiles({ year }) {
         <div className="driver-container">
           <div className="team-name">{activeTeam.name}</div>
           <div className="driver-profiles">
-            <DriverProfile driver={active_drivers[0]} />
-            <DriverProfile driver={active_drivers[1]} />
+            {/* <DriverProfile driver={active_drivers[0]} />
+            <DriverProfile driver={active_drivers[1]} /> */}
+            {activeDrivers.map((driver, index) => (
+              <DriverProfile key={index} driver={driver} />
+            ))}
           </div>
         </div>
       )}
