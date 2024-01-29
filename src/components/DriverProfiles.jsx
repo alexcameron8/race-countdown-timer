@@ -520,7 +520,7 @@ export function DriverProfiles({ year }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://ergast.com/api/f1/${year}/driverStandings.json`
+          `https://ergast.com/api/f1/${year}/driverStandings.json`
         ).then((res) => res.json());
         const driverStandings =
           response["MRData"]["StandingsTable"]["StandingsLists"][0];

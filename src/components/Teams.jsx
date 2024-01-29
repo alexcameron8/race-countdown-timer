@@ -72,7 +72,7 @@ export function Teams({ year, setActiveTeam }) {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://ergast.com/api/f1/${year}/constructors.json`
+          `https://ergast.com/api/f1/${year}/constructors.json`
         ).then((res) => res.json());
         const constructors =
           response["MRData"]["ConstructorTable"]["Constructors"];
