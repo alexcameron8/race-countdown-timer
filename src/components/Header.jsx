@@ -19,6 +19,20 @@ export function Header({ handleSelectYear, year }) {
           `https://ergast.com/api/f1/${year}.json`
         ).then((res) => res.json());
         const races = response["MRData"]["RaceTable"]["Races"];
+        // Find the closest or next race date compared to the current date
+        const currentDate = new Date();
+        let closestIndex = 0;
+        let closestDiff = Infinity;
+        races.forEach((race, index) => {
+          const raceDate = new Date(race.date);
+          const diff = raceDate - currentDate;
+          if (diff >= 0 && diff < closestDiff) {
+            closestDiff = diff;
+            closestIndex = index;
+          }
+        });
+
+        setSelectedRaceId(closestIndex);
         setRaceData(Array.from(races));
       } catch (error) {
         console.error("Error fetching data:", error);
