@@ -8,9 +8,16 @@ export function SelectDropdown({ raceData, onSelect }) {
   // Find the index of the closest or next race date compared to the current date
   const currentDate = new Date();
   let closestIndex = 0;
-  let closestDiff = Math.abs(currentDate - new Date(raceData[0].date));
-  for (let i = 1; i < raceData.length; i++) {
-    const diff = Math.abs(currentDate - new Date(raceData[i].date));
+  let closestDiff = Infinity; // Set initial closestDiff to Infinity
+  for (let i = 0; i < raceData.length; i++) {
+    const raceDate = new Date(raceData[i].date);
+    const diff = raceDate - currentDate;
+
+    // Check if race date has already passed
+    if (diff < 0) {
+      continue; // Skip this race date
+    }
+
     if (diff < closestDiff) {
       closestDiff = diff;
       closestIndex = i;
@@ -37,7 +44,6 @@ export function SelectDropdown({ raceData, onSelect }) {
           onSelect(selectedIndex);}}
       >
         {raceData.slice().map((race, index) => { 
-          console.log(race.date)
           return(
           <option className="race-option" key={race.round} value={index}>
             {race.raceName}
