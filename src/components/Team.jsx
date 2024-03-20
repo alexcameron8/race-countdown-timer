@@ -18,14 +18,14 @@ function getTeamImg(team) {
       return "/assets/icons/mercedes-benz-1.svg";
     case "racing_point":
       return "/assets/icons/bwt-racing-point-logo-1.svg";
+    case "rb":
+      return "/assets/icons/vcarb.jpg";
     case "red_bull":
       return "/assets/icons/red-bull-racing-f1.svg";
     case "renault":
       return "/assets/icons/renault-7.svg";
-    case "stake":
+    case "sauber":
       return "/assets/icons/stake-f1.PNG";
-    case "vcarb":
-      return "/assets/icons/vcarb.jpg";
     case "williams":
       return "/assets/icons/williams-racing-1.svg";
     default:

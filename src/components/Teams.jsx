@@ -45,9 +45,9 @@ export const raw_teams_data = [
     nationality: "Austrian",
   },
   {
-    constructorId: "stake",
-    name: "Stake F1",
-    image: "/assets/icons/stake-f1.PNG",
+    constructorId: "sauber",
+    name: "Sauber",
+    image: "/assets/icons/stake-F1.jpg",
     nationality: "Swiss",
   },
   {
@@ -57,9 +57,9 @@ export const raw_teams_data = [
     nationality: "British",
   },
   {
-    constructorId: "vcarb",
+    constructorId: "rb",
     name: "Visa Cash App RB",
-    image: "/assets/icons/alphatauri.svg",
+    image: "/assets/icons/vcarb.jpg",
     nationality: "Italian",
   },
 ];
