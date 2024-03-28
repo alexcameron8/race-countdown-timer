@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RaceInformation } from "./RaceInformation";
-import { RaceTimer } from "./RaceTimer";
+import { RaceTimer } from "../timer/RaceTimer";
 
 export function Header({ handleSelectYear, year }) {
   const [raceData, setRaceData] = useState(null);
@@ -44,16 +44,21 @@ export function Header({ handleSelectYear, year }) {
     fetchData();
   }, [year]);
   return (
-    <div className="header-container">
+    <div>
       {loading ? (
-        <div className="race-loading"></div>
+        <div className="flex" style={{ backgroundColor: "#ef233c" }}></div>
       ) : (
         <>
-          <div className="header">
-            <div className="title">{year} Formula 1 Race Countdown</div>
-            <div className="controls">
+          <div className="my-2 flex flex-row items-center justify-between">
+            <div className="mx-auto">
+              <h1 className="self-center justify-center flex bg-black my-1 uppercase font-extrabold text-center text-3xl text-white">
+                {year} Formula 1 Race Countdown
+              </h1>
+            </div>
+            <div className="top-0 right-0 items-center justify-end mx-2">
               <select
-                className="race-select"
+                className="bg-white text-black rounded-lg p-1 text-center text-lg"
+                style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}
                 onChange={(e) => handleSelectYear(e.target.value)}
               >
                 {years_list.map((year) => (
@@ -65,8 +70,11 @@ export function Header({ handleSelectYear, year }) {
             </div>
           </div>
 
-          <div className="landing">
-            <div className="race-info-container">
+          <div className="py-8 p-4 " style={{ backgroundColor: "#ef233c" }}>
+            <div
+              className="overflow-hidden mx-40 mb-2 rounded-xl items-center"
+              style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
+            >
               <RaceInformation
                 selectedRace={raceData[selectedRaceId]}
                 handleSelectRaceId={handleSelectRaceId}

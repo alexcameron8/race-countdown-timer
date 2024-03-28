@@ -2,11 +2,10 @@ import { Stats } from "./Stats";
 
 export function Name({ driver, driverWins, driverChampionships }) {
   return (
-    <div className="data">
-      <h1 className="name-header">
+    <div>
+      <h1 className="text-3xl font-bold my-2">
         {driver["Driver"]["givenName"] + " " + driver["Driver"]["familyName"]}
       </h1>
-      <p>{driver.team}</p>
       <Stats
         driver={driver}
         driverWins={driverWins}

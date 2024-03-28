@@ -118,11 +118,10 @@ export function RaceInformation({
 }) {
   const totalRaceCount = raceData.length;
   return (
-    <div className="race-information-container">
-      <div className="race-information">
-        <div className="race-title-container">
-          {/* <p> Location: </p> */}
-          <h1>
+    <div className="flex center flex-start mb-6 mx-1 ">
+      <div className="self-center flex-1 ">
+        <div className="items-center justify-center">
+          <h1 className="text-3xl text-white font-bold my-4">
             <span className="country-icon">
               {getEmojiFlag(selectedRace["raceName"])}
             </span>
@@ -131,25 +130,31 @@ export function RaceInformation({
               selectedRace["Circuit"]["Location"]["locality"]}
           </h1>
         </div>
-        <div className="race-line-container">
-          <h4>Date: {selectedRace["date"]}</h4>
+        <div className="flex items-center justify-center">
+          <h4 className="text-xl text-white font-bold my-4">
+            Date: {selectedRace["date"]}
+          </h4>
         </div>
         <RaceEvents selectedRace={selectedRace} />
-        <div className="race-line-container">
-          <h4>
+        <div className="flex items-center justify-center">
+          <h4 className="text-lg text-white font-bold my-4">
             Race: #{selectedRace["round"]}/{totalRaceCount}
           </h4>
         </div>
         <SelectDropdown raceData={raceData} onSelect={handleSelectRaceId} />
       </div>
-      <div className="circuit-container">
-        <div className="race-line-container">
-          {/* <p> Circuit: </p> */}
-          <h3>{selectedRace["Circuit"]["circuitName"]}</h3>
+      <div className="flex flex-col self-center flex-1 pt-2">
+        <div className="flex items-center justify-center">
+          <h3 className="text-white font-semibold my-2 text-2xl">
+            {selectedRace["Circuit"]["circuitName"]}
+          </h3>
         </div>
-        <div className="image-container">
+        <div
+          className="rounded-2xl mx-4 p-2 "
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+        >
           <img
-            className="circuit-image"
+            className="w-full"
             src={getCircuitPNG(selectedRace["raceName"])}
             alt={selectedRace["round"]}
           />
@@ -168,16 +173,11 @@ export function RaceEvents({ selectedRace }) {
   }
 
   return (
-    <div className="button-sessions-container">
+    <div className="flex items-center justify-center">
       {/* Check if FirstPractice exists */}
       {selectedRace.FirstPractice && (
-        // <div>
-        //   <h3>First Practice</h3>
-        //   <p>Date: {selectedRace.FirstPractice.date}</p>
-        //   <p>Time: {selectedRace.FirstPractice.time}</p>
-        // </div>
         <button
-          className="button-session"
+          className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
           onClick={() => handleSetSession("FP1")}
           style={{
             backgroundColor:
@@ -190,13 +190,8 @@ export function RaceEvents({ selectedRace }) {
 
       {/* Check if SecondPractice exists */}
       {selectedRace.SecondPractice && (
-        // <div>
-        //   <h3>Second Practice</h3>
-        //   <p>Date: {selectedRace.SecondPractice.date}</p>
-        //   <p>Time: {selectedRace.SecondPractice.time}</p>
-        // </div>
         <button
-          className="button-session"
+          className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
           onClick={() => handleSetSession("FP2")}
           style={{
             backgroundColor:
@@ -209,13 +204,8 @@ export function RaceEvents({ selectedRace }) {
 
       {/* Check if ThirdPractice exists */}
       {selectedRace.ThirdPractice && (
-        // <div>
-        //   <h3>Third Practice</h3>
-        //   <p>Date: {selectedRace.ThirdPractice.date}</p>
-        //   <p>Time: {selectedRace.ThirdPractice.time}</p>
-        // </div>
         <button
-          className="button-session"
+          className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
           onClick={() => handleSetSession("FP3")}
           style={{
             backgroundColor:
@@ -228,13 +218,8 @@ export function RaceEvents({ selectedRace }) {
 
       {/* Check if Qualifying exists */}
       {selectedRace.Qualifying && (
-        // <div>
-        //   <h3>Qualifying</h3>
-        //   <p>Date: {selectedRace.Qualifying.date}</p>
-        //   <p>Time: {selectedRace.Qualifying.time}</p>
-        // </div>
         <button
-          className="button-session"
+          className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
           onClick={() => handleSetSession("Qualifying")}
           style={{
             backgroundColor:
@@ -248,13 +233,8 @@ export function RaceEvents({ selectedRace }) {
       )}
       {/* Check if Sprint exists */}
       {selectedRace.Sprint && (
-        // <div>
-        //   <h3>Sprint</h3>
-        //   <p>Date: {selectedRace.Sprint.date}</p>
-        //   <p>Time: {selectedRace.Sprint.time}</p>
-        // </div>
         <button
-          className="button-session"
+          className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
           onClick={() => handleSetSession("Sprint")}
           style={{
             backgroundColor:
@@ -267,7 +247,7 @@ export function RaceEvents({ selectedRace }) {
         </button>
       )}
       <button
-        className="button-session"
+        className="mx-1 cursor-pointer border-2 border-black px-1 hover:scale-105 font-bold text-white hover:text-black"
         onClick={() => handleSetSession("Race")}
         style={{
           backgroundColor:

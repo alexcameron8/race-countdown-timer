@@ -37,8 +37,12 @@ export function Team({ team, setActiveTeam }) {
   const team_img = getTeamImg(team.constructorId);
 
   return (
-    <li className="team-li" onClick={() => setActiveTeam(team)}>
-      <img className="teamLogo" src={team_img} alt={team.name} />
+    // Require class for hover
+    <li
+      className="team-li rounded-3xl flex flex-col items-center justify-center team-li transition-transform transition-filter hover:scale-105 hover:brightness-120 hover:font-bold cursor-pointer"
+      onClick={() => setActiveTeam(team)}
+    >
+      <img className="w-28 h-28 max-w-none" src={team_img} alt={team.name} />
       <p>{team.name}</p>
     </li>
   );

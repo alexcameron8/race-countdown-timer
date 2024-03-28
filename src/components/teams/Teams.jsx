@@ -93,13 +93,13 @@ export function Teams({ year, setActiveTeam }) {
   }, [year]);
 
   return (
-    <div className="teams-container">
+    <div className="bg-white">
       {loading ? (
-        <div className="race-loading"></div>
+        <div className="flex" style={{ backgroundColor: "#ef233c" }}></div>
       ) : (
         <div className="wrapper">
           <div className="constructors">
-            <ul className="teams-list">
+            <ul className="my-8 flex flex-row list-none justify-center border-solid border-transparent items-center border-2 whitespace-nowrap">
               {constructorsData.map((teamItem) => (
                 <Team
                   team={teamItem}
@@ -110,7 +110,7 @@ export function Teams({ year, setActiveTeam }) {
             </ul>
           </div>
           <div className="constructors">
-            <ul className="teams-list">
+            <ul className="my-8 flex flex-row list-none justify-center border-solid border-transparent items-center border-2 whitespace-nowrap">
               {constructorsData.map((teamItem) => (
                 <Team
                   team={teamItem}

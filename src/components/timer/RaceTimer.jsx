@@ -43,7 +43,10 @@ export function RaceTimer({ selectedRace }) {
   return (
     <div>
       {!raceExpired ? (
-        <div className="timer">
+        <div
+          className=" flex flex-row mx-40 rounded-2xl my-8"
+          style={{ backgroundColor: `rgba(0, 0, 0, 0.4)` }}
+        >
           <TimerCircle type="days" time={days} color={"blue"} />
           <TimerCircle type="hours" time={hours} color={"white"} />
           <TimerCircle type="minutes" time={minutes} color={"yellow"} />

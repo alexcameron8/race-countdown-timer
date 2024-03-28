@@ -37,7 +37,7 @@ export function DriverProfile({ driver }) {
   }, [driver]);
 
   return (
-    <div className="driver-profile">
+    <div className="flex-1 rounded-2xl m-4 p-4 bg-white items-center justify-center flex flex-col">
       <DriverImg driver={driver} />
       <Name
         driver={driver}
