@@ -68,14 +68,18 @@ function getNationality(driverNationality) {
 export function Stats({ driver, driverWins, driverChampionships }) {
   return (
     <>
-      <h3 className="name-header">#{driver["Driver"]["permanentNumber"]}</h3>
+      <h3 className="text-3xl font-bold my-2">
+        #{driver["Driver"]["permanentNumber"]}
+      </h3>
       <div className="driver-stats">
-        <p>
+        <p className="my-1">
           Nationality: {driver["Driver"]["nationality"]}{" "}
           {getNationality(driver["Driver"]["nationality"])}
         </p>
-        <p>Race Wins: {getDriverRaceWins(driverWins)}🏁</p>
-        <p>Championships: {getDriverChampionships(driverChampionships)}🏆</p>
+        <p className="my-1">Race Wins: {getDriverRaceWins(driverWins)}🏁</p>
+        <p className="my-1">
+          Championships: {getDriverChampionships(driverChampionships)}🏆
+        </p>
       </div>
     </>
   );

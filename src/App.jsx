@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
 export default App;
-import { DriverProfiles } from "./components/DriverProfiles";
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
+import { DriverProfiles } from "./components/teams/DriverProfiles";
+import { Footer } from "./components/footer/Footer";
+import { Header } from "./components/landing/Header";
 import { useEffect, useState } from "react";
 
 function App() {

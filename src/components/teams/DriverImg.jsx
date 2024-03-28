@@ -47,7 +47,7 @@ export function DriverImg({ driver }) {
   }
   return (
     <img
-      className="avatar"
+      className="rounded-full w-4/5 justify-center"
       src={getDriverImg(driver["Driver"]["driverId"])}
       alt={driver["Driver"]["driverId"]}
     />

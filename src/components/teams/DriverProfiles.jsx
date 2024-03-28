@@ -548,11 +548,11 @@ export function DriverProfiles({ year }) {
       {activeTeam === null || driverStandingsData === null ? (
         <div>Placeholder Loading</div>
       ) : (
-        <div className="driver-container">
-          <div className="team-name">{activeTeam.name}</div>
-          <div className="driver-profiles">
-            {/* <DriverProfile driver={active_drivers[0]} />
-            <DriverProfile driver={active_drivers[1]} /> */}
+        <div className="bg-black">
+          <div className="team-name uppercase my-6 text-white text-4xl">
+            {activeTeam.name}
+          </div>
+          <div className="flex flex-wrap items-stretch mx-52">
             {activeDrivers.map((driver, index) => (
               <DriverProfile key={index} driver={driver} />
             ))}
